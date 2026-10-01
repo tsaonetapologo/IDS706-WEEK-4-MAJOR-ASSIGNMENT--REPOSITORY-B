@@ -37,7 +37,8 @@ def prepare_model_data(df):
 
     model_df["age"] = pd.to_numeric(model_df["age"], errors="coerce")
     model_df["purchase_amount"] = pd.to_numeric(
-        model_df["purchase_amount"], errors="coerce"
+        model_df["purchase_amount"].astype(str).str.replace(r"[$,]", "", regex=True),
+        errors="coerce",
     )
 
     model_df = model_df.dropna()
