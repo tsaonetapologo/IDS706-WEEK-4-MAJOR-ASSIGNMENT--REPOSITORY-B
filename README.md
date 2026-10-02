@@ -170,6 +170,67 @@ This analysis uses customer age as the only predictor of purchase amount. Other 
 
 Therefore, the regression results should not be interpreted as evidence that age causes changes in purchase amount.
 
+## AI-Assisted Workflow Summary
+
+### Selected option
+Option 1: AI-assisted workflow project for Repository B.
+
+### Purpose of the project
+This project demonstrates a reproducible, AI-assisted data analysis workflow for an e-commerce dataset. It focuses on data loading, cleaning, exploratory statistics, visualization, and a simple regression analysis.
+
+### Install, run, and test
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+python -m analysis.exploratory_analysis
+pytest
+```
+
+### Docker build and run
+
+```bash
+docker build -t repo-b .
+docker run --rm repo-b
+```
+
+The container uses the project root as the working directory and runs the exploratory analysis automatically when the image starts.
+
+### Manual smoke test result
+The manual smoke test was successful. The documented setup instructions worked, the analysis script executed without errors, the summary figures printed correctly, and the main output file was created in the `reports/` directory.
+
+Observed results:
+
+- mean age: `34.304000`
+- mean purchase amount: `275.063880`
+- correlation coefficient: `-0.016300`
+- automated tests: `4 passed in 0.21s`
+- Docker build: successful (`docker build -t repo-b .` completed successfully)
+
+### AI role contributions
+- Architect: defined the project goal, requirements, risks, and validation steps.
+- Builder: implemented the data-cleaning fix, updated the analysis output, and aligned the project files with the working setup.
+- Tester: reviewed the implementation against the plan and confirmed the expected behavior through the test suite.
+
+### AI recommendations accepted
+- Accepted the recommendation to strip currency symbols and commas before converting `purchase_amount` to numeric values.
+- Accepted the recommendation to clamp the correlation coefficient to the valid range of `[-1, 1]`.
+
+### Recommendations changed or rejected
+- Rejected the idea of leaving the raw pandas summary output in the terminal; instead, the script now prints explicit numeric summary values for clarity.
+- Adjusted the README to reflect the actual verified commands and results rather than a generic project description.
+
+### Independent verification
+The final result was verified independently by running:
+
+```bash
+pytest -q
+python -m analysis.exploratory_analysis
+```
+
+These checks confirm the project runs successfully and the main feature output is produced as expected.
+
 ## Reproducibility
 
 The required Python packages are listed in `requirements.txt`.
